@@ -7,8 +7,8 @@ import (
 	"go-demoservice/db"
 	mykafka "go-demoservice/kafka"
 	"go-demoservice/utils"
+	"go-demoservice/web/backend"
 	"sync"
-	_ "sync"
 
 	"github.com/segmentio/kafka-go"
 )
@@ -17,12 +17,12 @@ func main() {
 	dbase, err := db.MakeDbConnection()
 	if err != nil {
 		utils.DbLogger.Error(err)
-		panic("")
+		panic(err)
 	}
 	defer dbase.Close()
 
 	var wg sync.WaitGroup
-	wg.Add(2)
+	wg.Add(3)
 
 	utils.BaseLogger.Info("Start working of a service")
 
@@ -37,6 +37,8 @@ func main() {
 
 	go mykafka.GenerateMessages(encoder, messageWriter, buff, &wg)
 	go mykafka.ConsumerLoop(messageReader, &wg, dbase)
+
+	backend.App(dbase)
 
 	wg.Wait()
 

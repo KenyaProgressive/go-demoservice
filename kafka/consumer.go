@@ -41,7 +41,7 @@ func ConsumerLoop(messageReader *kafka.Reader, wg *sync.WaitGroup, db *sql.DB) {
 			continue // Read this message again
 		}
 
-		utils.KafkaReadLogger.Infof("Message (%s) was successfully read by consumer", string(msg.Value))
+		utils.KafkaReadLogger.Debugf("Message (%s) was successfully read by consumer", string(msg.Value))
 
 		if err := mydb.PrepareMessagesAndPushToDb(db, msg.Value); err != nil {
 			utils.DbLogger.Errorf("Pushing message to database was stopped with error: %s", err)

@@ -22,7 +22,7 @@ func MakeDbConnection() (*sql.DB, error) {
 		return nil, err
 	}
 
-	db.SetMaxOpenConns(350)
+	db.SetMaxOpenConns(50)
 
 	return db, nil
 }
@@ -56,18 +56,18 @@ func PrepareMessagesAndPushToDb(db *sql.DB, ValueToPush []byte) error {
 
 	tx, err := db.Begin()
 	if err != nil {
-		utils.DbLogger.Errorf("Transaction wasn't started wtih error: %s", err)
+		utils.DbLogger.Errorf("Transaction-Push wasn't started wtih error: %s", err)
 		return err
 	}
 
 	defer func() {
-		if err != nil { // Transaction Error
+		if err != nil { // Transaction-Push Error
 			errRb := tx.Rollback()
 
 			if errRb != nil { // Rollback Error
 				utils.DbLogger.Errorf("Rollback wasn't completed with error: %s", errRb)
 			} else { // Success Rollback
-				utils.DbLogger.Warnf("Transaction was failed. Doing rollback")
+				utils.DbLogger.Warnf("Transaction-Push was failed. Doing rollback")
 			}
 		}
 	}()
@@ -103,4 +103,112 @@ func PrepareMessagesAndPushToDb(db *sql.DB, ValueToPush []byte) error {
 	}
 
 	return tx.Commit()
+}
+
+func GetInfoAndCreateMessage(db *sql.DB, target_uuid string, msg *utils.Message) error {
+
+	withoutItemsTx, errWithoutItemsTx := db.Begin()
+	if errWithoutItemsTx != nil {
+		utils.DbLogger.Errorf("Info getting failed with error: %s", errWithoutItemsTx)
+		return errWithoutItemsTx
+	}
+
+	defer func() {
+		if errWithoutItemsTx != nil { // Transaction-Select Error
+			_ = withoutItemsTx.Rollback()
+		}
+	}()
+
+	resultWithoutItems := withoutItemsTx.QueryRow(SelectQueryInfoWithoutItems, target_uuid)
+
+	txItems, errTxItems := db.Begin()
+	if errTxItems != nil {
+		utils.DbLogger.Errorf("Info getting failed with error: %s", errTxItems)
+		return errTxItems
+	}
+
+	defer func() {
+		if errTxItems != nil { // Transaction-Select Error
+			_ = txItems.Rollback()
+		}
+	}()
+
+	resultItems, errItems := txItems.Query(SelectQueryItems, target_uuid)
+	if errItems != nil {
+		utils.DbLogger.Errorf("Query was failed with error: %s", errItems)
+		return errItems
+	}
+
+	//utils.DbLogger.Debug(resultItems.Columns())
+
+	errCompletingMessage := PushingToMessageStructure(resultWithoutItems, resultItems, msg)
+	if errCompletingMessage != nil {
+		utils.DbLogger.Errorf("Error in pushing data to structure: %s", errCompletingMessage)
+		return errCompletingMessage
+	}
+
+	withoutItemsTx.Commit()
+	txItems.Commit()
+
+	return nil
+}
+
+func PushingToMessageStructure(withoutItemsRow *sql.Row, itemsRows *sql.Rows, msg *utils.Message) error {
+	errScanWithoutItems := withoutItemsRow.Scan(
+		&msg.OrderUId,
+		&msg.TrackNumber,
+		&msg.Entry,
+		&msg.Delivery.Name,
+		&msg.Delivery.Phone,
+		&msg.Delivery.ZipCode,
+		&msg.Delivery.City,
+		&msg.Delivery.Address,
+		&msg.Delivery.Region,
+		&msg.Delivery.Email,
+		&msg.Payment.Transaction,
+		&msg.Payment.RequestId,
+		&msg.Payment.Currency,
+		&msg.Payment.Provider,
+		&msg.Payment.Amount,
+		&msg.Payment.PaymentDt,
+		&msg.Payment.Bank,
+		&msg.Payment.DeliveryCost,
+		&msg.Payment.GoodsTotal,
+		&msg.Payment.CustomFee,
+		&msg.Locale,
+		&msg.InternalSignature,
+		&msg.CustomerId,
+		&msg.DeliveryService,
+		&msg.ShardKey,
+		&msg.SmId,
+		&msg.DateCreated,
+		&msg.OofShard)
+
+	if errScanWithoutItems != nil {
+		return errScanWithoutItems
+	}
+
+	var itemInfo utils.Items
+
+	for itemsRows.Next() {
+		errScanItems := itemsRows.Scan(
+			&itemInfo.ChrtID,
+			&itemInfo.TrackNumber,
+			&itemInfo.Price,
+			&itemInfo.Rid,
+			&itemInfo.Name,
+			&itemInfo.Sale,
+			&itemInfo.Size,
+			&itemInfo.TotalPrice,
+			&itemInfo.NmID,
+			&itemInfo.Brand,
+			&itemInfo.Status,
+		)
+		if errScanItems != nil {
+			return errScanItems
+		}
+		msg.Items = append(msg.Items, itemInfo)
+	}
+
+	return nil
 }

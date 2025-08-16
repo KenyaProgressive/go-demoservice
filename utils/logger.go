@@ -10,6 +10,7 @@ var BaseLogger = initBaseLogger()
 var DbLogger = initDbLogger()
 var KafkaReadLogger = initKafkaReadLogger()
 var KafkaWriteLogger = initKafkaWriteLogger()
+var BackendLogger = initBackendLogger()
 
 func initBaseLogger() *logrus.Logger {
 	bl := logrus.New()
@@ -84,4 +85,22 @@ func initKafkaWriteLogger() *logrus.Logger {
 
 	return kfWL
 
+}
+
+func initBackendLogger() *logrus.Logger {
+	backl := logrus.New()
+	backl.SetFormatter(&logrus.JSONFormatter{
+		TimestampFormat: logTimeFormat,
+		PrettyPrint:     true})
+
+	backl.SetLevel(logrus.DebugLevel)
+
+	logfile, err := os.OpenFile("logs/backend-log.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
+
+	if err != nil {
+		backl.Error(err)
+	} else {
+		backl.SetOutput(logfile)
+	}
+	return backl
 }
