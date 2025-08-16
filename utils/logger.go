@@ -6,10 +6,6 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-const (
-	logTimeFormat string = "02.01.2006 15:04:05"
-)
-
 var BaseLogger = initBaseLogger()
 var DbLogger = initDbLogger()
 var KafkaReadLogger = initKafkaReadLogger()

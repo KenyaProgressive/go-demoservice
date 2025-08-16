@@ -1,0 +1,360 @@
+{
+  "level": "info",
+  "msg": "entering loop for consumer group, demoservice-group\n",
+  "time": "16.08.2025 15:04:38"
+}
+{
+  "level": "info",
+  "msg": "Unable to establish connection to consumer group coordinator for group demoservice-group: [15] Group Coordinator Not Available: the broker returns this error code for group coordinator requests, offset commits, and most group management requests if the offsets topic has not yet been created, or if the group coordinator is not active",
+  "time": "16.08.2025 15:04:38"
+}
+{
+  "level": "info",
+  "msg": "[15] Group Coordinator Not Available: the broker returns this error code for group coordinator requests, offset commits, and most group management requests if the offsets topic has not yet been created, or if the group coordinator is not active",
+  "time": "16.08.2025 15:04:38"
+}
+{
+  "level": "info",
+  "msg": "joined group demoservice-group as member go-demoservice@KenyaUbuntu (github.com/segmentio/kafka-go)-2526d351-b379-446d-9bc5-c5c0a4d8028b in generation 1",
+  "time": "16.08.2025 15:04:43"
+}
+{
+  "level": "info",
+  "msg": "selected as leader for group, demoservice-group\n",
+  "time": "16.08.2025 15:04:43"
+}
+{
+  "level": "info",
+  "msg": "using 'range' balancer to assign group, demoservice-group",
+  "time": "16.08.2025 15:04:43"
+}
+{
+  "level": "info",
+  "msg": "found member: go-demoservice@KenyaUbuntu (github.com/segmentio/kafka-go)-2526d351-b379-446d-9bc5-c5c0a4d8028b/[]byte(nil)",
+  "time": "16.08.2025 15:04:43"
+}
+{
+  "level": "info",
+  "msg": "found topic/partition: demoservice-orders/1",
+  "time": "16.08.2025 15:04:43"
+}
+{
+  "level": "info",
+  "msg": "found topic/partition: demoservice-orders/2",
+  "time": "16.08.2025 15:04:43"
+}
+{
+  "level": "info",
+  "msg": "found topic/partition: demoservice-orders/0",
+  "time": "16.08.2025 15:04:43"
+}
+{
+  "level": "info",
+  "msg": "assigned member/topic/partitions go-demoservice@KenyaUbuntu (github.com/segmentio/kafka-go)-2526d351-b379-446d-9bc5-c5c0a4d8028b/demoservice-orders/[1 2 0]",
+  "time": "16.08.2025 15:04:43"
+}
+{
+  "level": "info",
+  "msg": "joinGroup succeeded for response, demoservice-group.  generationID=1, memberID=go-demoservice@KenyaUbuntu (github.com/segmentio/kafka-go)-2526d351-b379-446d-9bc5-c5c0a4d8028b",
+  "time": "16.08.2025 15:04:43"
+}
+{
+  "level": "info",
+  "msg": "Joined group demoservice-group as member go-demoservice@KenyaUbuntu (github.com/segmentio/kafka-go)-2526d351-b379-446d-9bc5-c5c0a4d8028b in generation 1",
+  "time": "16.08.2025 15:04:43"
+}
+{
+  "level": "info",
+  "msg": "Syncing 1 assignments for generation 1 as member go-demoservice@KenyaUbuntu (github.com/segmentio/kafka-go)-2526d351-b379-446d-9bc5-c5c0a4d8028b",
+  "time": "16.08.2025 15:04:43"
+}
+{
+  "level": "info",
+  "msg": "sync group finished for group, demoservice-group",
+  "time": "16.08.2025 15:04:43"
+}
+{
+  "level": "info",
+  "msg": "subscribed to topics and partitions: map[{topic:demoservice-orders partition:0}:-2 {topic:demoservice-orders partition:1}:-2 {topic:demoservice-orders partition:2}:-2]",
+  "time": "16.08.2025 15:04:43"
+}
+{
+  "level": "info",
+  "msg": "initializing kafka reader for partition 1 of demoservice-orders starting at offset first offset",
+  "time": "16.08.2025 15:04:43"
+}
+{
+  "level": "info",
+  "msg": "started commit for group demoservice-group\n",
+  "time": "16.08.2025 15:04:43"
+}
+{
+  "level": "info",
+  "msg": "started heartbeat for group, demoservice-group [3s]",
+  "time": "16.08.2025 15:04:43"
+}
+{
+  "level": "info",
+  "msg": "initializing kafka reader for partition 2 of demoservice-orders starting at offset first offset",
+  "time": "16.08.2025 15:04:43"
+}
+{
+  "level": "info",
+  "msg": "initializing kafka reader for partition 0 of demoservice-orders starting at offset first offset",
+  "time": "16.08.2025 15:04:43"
+}
+{
+  "level": "info",
+  "msg": "the kafka reader for partition 2 of demoservice-orders is seeking to offset 0",
+  "time": "16.08.2025 15:04:43"
+}
+{
+  "level": "info",
+  "msg": "the kafka reader for partition 1 of demoservice-orders is seeking to offset 0",
+  "time": "16.08.2025 15:04:43"
+}
+{
+  "level": "info",
+  "msg": "the kafka reader for partition 0 of demoservice-orders is seeking to offset 0",
+  "time": "16.08.2025 15:04:43"
+}
+{
+  "level": "info",
+  "msg": "committed offsets for group demoservice-group: \n\ttopic: demoservice-orders\n\t\tpartition 1: 1",
+  "time": "16.08.2025 15:04:43"
+}
+{
+  "level": "info",
+  "msg": "Message ({\"order_uid\":\"812042f8-cac0-4950-89db-7a55dfff3916\",\"track_number\":\"WBILMTESTTRACK\",\"entry\":\"WBIL\",\"delivery\":{\"name\":\"Anya Hilpert\",\"phone\":\"245-804-9299\",\"zip\":\"10001\",\"city\":\"Brandtborough\",\"address\":\"345 Hettinger Village\",\"region\":\"Aruba\",\"email\":\"natalie.cassin@gmail.com\"},\"payment\":{\"transaction\":\"812042f8-cac0-4950-89db-7a55dfff3916\",\"request_id\":\"\",\"currency\":\"LBP\",\"provider\":\"wbpay\",\"amount\":3049,\"payment_dt\":1755345878,\"bank\":\"Alpha\",\"delivery_cost\":485,\"goods_total\":2564,\"custom_fee\":0},\"items\":[{\"chrt_id\":459105686,\"track_number\":\"WBILMTESTTRACK\",\"price\":723,\"rid\":\"b51bb171-de84-44a2-970b-ef48354b4e34\",\"name\":\"Fantastic Metal Soap\",\"sale\":39,\"size\":\"60\",\"total_price\":2564,\"nm_id\":454675617,\"brand\":\"monitor\",\"status\":784}],\"locale\":\"lt\",\"internal_signature\":\"\",\"customer_id\":\"273254test\",\"delivery_service\":\"meest\",\"shardkey\":\"9\",\"sm_id\":106,\"date_created\":\"2025-08-16T12:04:38.565Z\",\"oof_shard\":\"4\"}\n) was successfully read by consumer",
+  "time": "16.08.2025 15:04:43"
+}
+{
+  "level": "info",
+  "msg": "committed offsets for group demoservice-group: \n\ttopic: demoservice-orders\n\t\tpartition 1: 2",
+  "time": "16.08.2025 15:04:43"
+}
+{
+  "level": "info",
+  "msg": "Message ({\"order_uid\":\"3719d708-cfd9-41db-b391-a949d66f43c0\",\"track_number\":\"WBILMTESTTRACK\",\"entry\":\"WBIL\",\"delivery\":{\"name\":\"Keegan Ferry\",\"phone\":\"743-470-8386\",\"zip\":\"10115\",\"city\":\"Anthonyberg\",\"address\":\"122128 Osinski Ports Suite 006\",\"region\":\"Armenia\",\"email\":\"amber.hill@outlook.com\"},\"payment\":{\"transaction\":\"3719d708-cfd9-41db-b391-a949d66f43c0\",\"request_id\":\"\",\"currency\":\"INR\",\"provider\":\"wbpay\",\"amount\":8053,\"payment_dt\":1755345879,\"bank\":\"Deutsche Bank\",\"delivery_cost\":3307,\"goods_total\":4746,\"custom_fee\":0},\"items\":[{\"chrt_id\":919706820,\"track_number\":\"WBILMTESTTRACK\",\"price\":524,\"rid\":\"15f679ed-bae5-4743-b1b1-cb62b440883d\",\"name\":\"Recycled Wooden Towels\",\"sale\":32,\"size\":\"44\",\"total_price\":4746,\"nm_id\":633849476,\"brand\":\"matrix\",\"status\":495}],\"locale\":\"ca\",\"internal_signature\":\"\",\"customer_id\":\"687635test\",\"delivery_service\":\"meest\",\"shardkey\":\"3\",\"sm_id\":971,\"date_created\":\"2025-08-16T12:04:39.583Z\",\"oof_shard\":\"1\"}\n) was successfully read by consumer",
+  "time": "16.08.2025 15:04:43"
+}
+{
+  "level": "info",
+  "msg": "committed offsets for group demoservice-group: \n\ttopic: demoservice-orders\n\t\tpartition 1: 3",
+  "time": "16.08.2025 15:04:43"
+}
+{
+  "level": "info",
+  "msg": "Message ({\"order_uid\":\"00fe5c23-54fc-4e47-84fc-7c403365fa0d\",\"track_number\":\"WBILMTESTTRACK\",\"entry\":\"WBIL\",\"delivery\":{\"name\":\"Zelda Doyle\",\"phone\":\"783-872-8900\",\"zip\":\"110001\",\"city\":\"North Scarlettport\",\"address\":\"35 Hermann Locks\",\"region\":\"India\",\"email\":\"olivia.stark@gmail.com\"},\"payment\":{\"transaction\":\"00fe5c23-54fc-4e47-84fc-7c403365fa0d\",\"request_id\":\"\",\"currency\":\"RSD\",\"provider\":\"wbpay\",\"amount\":10128,\"payment_dt\":1755345880,\"bank\":\"Bank of America\",\"delivery_cost\":4149,\"goods_total\":5979,\"custom_fee\":0},\"items\":[{\"chrt_id\":93633814,\"track_number\":\"WBILMTESTTRACK\",\"price\":775,\"rid\":\"4f0aba31-4c3a-483b-a810-56cdd016e023\",\"name\":\"Oriental Granite Gloves\",\"sale\":36,\"size\":\"56\",\"total_price\":5979,\"nm_id\":580427402,\"brand\":\"back up\",\"status\":70}],\"locale\":\"ms\",\"internal_signature\":\"\",\"customer_id\":\"153832test\",\"delivery_service\":\"meest\",\"shardkey\":\"1\",\"sm_id\":332,\"date_created\":\"2025-08-16T12:04:40.586Z\",\"oof_shard\":\"8\"}\n) was successfully read by consumer",
+  "time": "16.08.2025 15:04:43"
+}
+{
+  "level": "info",
+  "msg": "committed offsets for group demoservice-group: \n\ttopic: demoservice-orders\n\t\tpartition 1: 4",
+  "time": "16.08.2025 15:04:43"
+}
+{
+  "level": "info",
+  "msg": "Message ({\"order_uid\":\"7f857312-5958-4f6d-ae42-976c1109bfde\",\"track_number\":\"WBILMTESTTRACK\",\"entry\":\"WBIL\",\"delivery\":{\"name\":\"Geoffrey Ward\",\"phone\":\"235-151-2923\",\"zip\":\"75001\",\"city\":\"Turnermouth\",\"address\":\"4731 Wehner Rest\",\"region\":\"Hungary\",\"email\":\"nate.campbell@hotmail.com\"},\"payment\":{\"transaction\":\"7f857312-5958-4f6d-ae42-976c1109bfde\",\"request_id\":\"\",\"currency\":\"XDR\",\"provider\":\"wbpay\",\"amount\":6403,\"payment_dt\":1755345881,\"bank\":\"UBS Group\",\"delivery_cost\":5409,\"goods_total\":994,\"custom_fee\":0},\"items\":[{\"chrt_id\":916459600,\"track_number\":\"WBILMTESTTRACK\",\"price\":825,\"rid\":\"6fb72141-cf4f-45cb-8e27-4d6c4f69b782\",\"name\":\"Sleek Plastic Computer\",\"sale\":44,\"size\":\"35\",\"total_price\":994,\"nm_id\":681345837,\"brand\":\"overriding\",\"status\":377}],\"locale\":\"gn\",\"internal_signature\":\"\",\"customer_id\":\"129480test\",\"delivery_service\":\"meest\",\"shardkey\":\"9\",\"sm_id\":843,\"date_created\":\"2025-08-16T12:04:41.590Z\",\"oof_shard\":\"8\"}\n) was successfully read by consumer",
+  "time": "16.08.2025 15:04:43"
+}
+{
+  "level": "info",
+  "msg": "committed offsets for group demoservice-group: \n\ttopic: demoservice-orders\n\t\tpartition 1: 5",
+  "time": "16.08.2025 15:04:43"
+}
+{
+  "level": "info",
+  "msg": "Message ({\"order_uid\":\"791ff100-b10a-4253-8571-b964d751c09c\",\"track_number\":\"WBILMTESTTRACK\",\"entry\":\"WBIL\",\"delivery\":{\"name\":\"Ms. Selena Koss MD\",\"phone\":\"134-808-8701\",\"zip\":\"150-0001\",\"city\":\"North Vicente\",\"address\":\"44 Feest Extensions\",\"region\":\"Niger\",\"email\":\"jacob.hermann@outlook.com\"},\"payment\":{\"transaction\":\"791ff100-b10a-4253-8571-b964d751c09c\",\"request_id\":\"\",\"currency\":\"USD\",\"provider\":\"wbpay\",\"amount\":7623,\"payment_dt\":1755345882,\"bank\":\"Ironwood Savings \\u0026 Loan\",\"delivery_cost\":6310,\"goods_total\":1313,\"custom_fee\":0},\"items\":[{\"chrt_id\":376593334,\"track_number\":\"WBILMTESTTRACK\",\"price\":142,\"rid\":\"36d36ba3-b242-4e1b-ba61-64972c4827af\",\"name\":\"Tasty Cotton Mouse\",\"sale\":29,\"size\":\"35\",\"total_price\":1313,\"nm_id\":281134600,\"brand\":\"system\",\"status\":434}],\"locale\":\"bn\",\"internal_signature\":\"\",\"customer_id\":\"525000test\",\"delivery_service\":\"meest\",\"shardkey\":\"7\",\"sm_id\":165,\"date_created\":\"2025-08-16T12:04:42.594Z\",\"oof_shard\":\"5\"}\n) was successfully read by consumer",
+  "time": "16.08.2025 15:04:43"
+}
+{
+  "level": "info",
+  "msg": "committed offsets for group demoservice-group: \n\ttopic: demoservice-orders\n\t\tpartition 1: 6",
+  "time": "16.08.2025 15:04:44"
+}
+{
+  "level": "info",
+  "msg": "Message ({\"order_uid\":\"7d5ab3cb-2bec-466f-87be-1c36f2ac1094\",\"track_number\":\"WBILMTESTTRACK\",\"entry\":\"WBIL\",\"delivery\":{\"name\":\"Ms. Breanne Tromp\",\"phone\":\"129-848-8137\",\"zip\":\"1012\",\"city\":\"West Myrtisshire\",\"address\":\"32151 Lon Union Apt. 588\",\"region\":\"Austria\",\"email\":\"oliver.hudson@hotmail.com\"},\"payment\":{\"transaction\":\"7d5ab3cb-2bec-466f-87be-1c36f2ac1094\",\"request_id\":\"\",\"currency\":\"BZD\",\"provider\":\"wbpay\",\"amount\":10803,\"payment_dt\":1755345883,\"bank\":\"Blue Horizon Bank\",\"delivery_cost\":6955,\"goods_total\":3848,\"custom_fee\":0},\"items\":[{\"chrt_id\":155636605,\"track_number\":\"WBILMTESTTRACK\",\"price\":859,\"rid\":\"3fb79751-8221-49fe-81d1-952003260906\",\"name\":\"Electronic Rubber Chicken\",\"sale\":10,\"size\":\"42\",\"total_price\":3848,\"nm_id\":489963460,\"brand\":\"synthesizing\",\"status\":686}],\"locale\":\"in\",\"internal_signature\":\"\",\"customer_id\":\"123747test\",\"delivery_service\":\"meest\",\"shardkey\":\"1\",\"sm_id\":965,\"date_created\":\"2025-08-16T12:04:43.597Z\",\"oof_shard\":\"5\"}\n) was successfully read by consumer",
+  "time": "16.08.2025 15:04:44"
+}
+{
+  "level": "info",
+  "msg": "committed offsets for group demoservice-group: \n\ttopic: demoservice-orders\n\t\tpartition 1: 7",
+  "time": "16.08.2025 15:04:45"
+}
+{
+  "level": "info",
+  "msg": "Message ({\"order_uid\":\"d30626ab-9999-41f9-bb34-bffe6d3b5d0b\",\"track_number\":\"WBILMTESTTRACK\",\"entry\":\"WBIL\",\"delivery\":{\"name\":\"Nya Stanton V\",\"phone\":\"978-521-9670\",\"zip\":\"00175\",\"city\":\"Houstonview\",\"address\":\"2143 Senger Locks Suite 307\",\"region\":\"Netherlands Antilles\",\"email\":\"lillian.turner@hotmail.com\"},\"payment\":{\"transaction\":\"d30626ab-9999-41f9-bb34-bffe6d3b5d0b\",\"request_id\":\"\",\"currency\":\"UAH\",\"provider\":\"wbpay\",\"amount\":12736,\"payment_dt\":1755345884,\"bank\":\"BNP Paribas\",\"delivery_cost\":5543,\"goods_total\":7193,\"custom_fee\":0},\"items\":[{\"chrt_id\":171471641,\"track_number\":\"WBILMTESTTRACK\",\"price\":659,\"rid\":\"2f45decc-4a1a-4002-a88b-64febae2741f\",\"name\":\"Unbranded Plastic Chips\",\"sale\":63,\"size\":\"36\",\"total_price\":7193,\"nm_id\":107154882,\"brand\":\"feed\",\"status\":836}],\"locale\":\"id\",\"internal_signature\":\"\",\"customer_id\":\"454042test\",\"delivery_service\":\"meest\",\"shardkey\":\"5\",\"sm_id\":573,\"date_created\":\"2025-08-16T12:04:44.601Z\",\"oof_shard\":\"9\"}\n) was successfully read by consumer",
+  "time": "16.08.2025 15:04:45"
+}
+{
+  "level": "info",
+  "msg": "committed offsets for group demoservice-group: \n\ttopic: demoservice-orders\n\t\tpartition 1: 8",
+  "time": "16.08.2025 15:04:46"
+}
+{
+  "level": "info",
+  "msg": "Message ({\"order_uid\":\"8c9b3e6c-098f-4488-8f4e-7f2f9b82cda6\",\"track_number\":\"WBILMTESTTRACK\",\"entry\":\"WBIL\",\"delivery\":{\"name\":\"Beryl Gorczany III\",\"phone\":\"115-428-8052\",\"zip\":\"30301\",\"city\":\"Paucekhaven\",\"address\":\"614 Stroman Village Apt. 821\",\"region\":\"Suriname\",\"email\":\"claire.hackett@protonmail.com\"},\"payment\":{\"transaction\":\"8c9b3e6c-098f-4488-8f4e-7f2f9b82cda6\",\"request_id\":\"\",\"currency\":\"NIO\",\"provider\":\"wbpay\",\"amount\":10034,\"payment_dt\":1755345885,\"bank\":\"Royal Bank of Canada\",\"delivery_cost\":6807,\"goods_total\":3227,\"custom_fee\":0},\"items\":[{\"chrt_id\":545226408,\"track_number\":\"WBILMTESTTRACK\",\"price\":890,\"rid\":\"641f4d10-12e4-4782-a19b-a83e29c28d75\",\"name\":\"Modern Cotton Pants\",\"sale\":15,\"size\":\"38\",\"total_price\":3227,\"nm_id\":240452144,\"brand\":\"connecting\",\"status\":184}],\"locale\":\"ik\",\"internal_signature\":\"\",\"customer_id\":\"138528test\",\"delivery_service\":\"meest\",\"shardkey\":\"4\",\"sm_id\":582,\"date_created\":\"2025-08-16T12:04:45.604Z\",\"oof_shard\":\"8\"}\n) was successfully read by consumer",
+  "time": "16.08.2025 15:04:46"
+}
+{
+  "level": "info",
+  "msg": "committed offsets for group demoservice-group: \n\ttopic: demoservice-orders\n\t\tpartition 1: 9",
+  "time": "16.08.2025 15:04:47"
+}
+{
+  "level": "info",
+  "msg": "Message ({\"order_uid\":\"601a8965-8ea6-4283-b961-dffac9019555\",\"track_number\":\"WBILMTESTTRACK\",\"entry\":\"WBIL\",\"delivery\":{\"name\":\"Mara Hills\",\"phone\":\"140-887-1335\",\"zip\":\"90210\",\"city\":\"Wardbury\",\"address\":\"77233 Schinner Hill\",\"region\":\"Botswana\",\"email\":\"layla.alexander@yahoo.com\"},\"payment\":{\"transaction\":\"601a8965-8ea6-4283-b961-dffac9019555\",\"request_id\":\"\",\"currency\":\"WST\",\"provider\":\"wbpay\",\"amount\":3678,\"payment_dt\":1755345886,\"bank\":\"Standard Chartered Bank\",\"delivery_cost\":3488,\"goods_total\":190,\"custom_fee\":0},\"items\":[{\"chrt_id\":759542526,\"track_number\":\"WBILMTESTTRACK\",\"price\":859,\"rid\":\"2fc34dd1-55f4-4ec1-b3ef-6e3615ff2db8\",\"name\":\"Licensed Steel Fish\",\"sale\":9,\"size\":\"54\",\"total_price\":190,\"nm_id\":314239525,\"brand\":\"pixel\",\"status\":935}],\"locale\":\"ik\",\"internal_signature\":\"\",\"customer_id\":\"214369test\",\"delivery_service\":\"meest\",\"shardkey\":\"3\",\"sm_id\":721,\"date_created\":\"2025-08-16T12:04:46.607Z\",\"oof_shard\":\"9\"}\n) was successfully read by consumer",
+  "time": "16.08.2025 15:04:47"
+}
+{
+  "level": "info",
+  "msg": "committed offsets for group demoservice-group: \n\ttopic: demoservice-orders\n\t\tpartition 1: 10",
+  "time": "16.08.2025 15:04:48"
+}
+{
+  "level": "info",
+  "msg": "Message ({\"order_uid\":\"d12dd23a-30ae-49c4-9367-776e997c7d27\",\"track_number\":\"WBILMTESTTRACK\",\"entry\":\"WBIL\",\"delivery\":{\"name\":\"Bertram Sporer\",\"phone\":\"721-680-7086\",\"zip\":\"60601\",\"city\":\"Lake Casimer\",\"address\":\"745653 Price Extensions Apt. 507\",\"region\":\"Swaziland\",\"email\":\"ali.koelpin@outlook.com\"},\"payment\":{\"transaction\":\"d12dd23a-30ae-49c4-9367-776e997c7d27\",\"request_id\":\"\",\"currency\":\"XPT\",\"provider\":\"wbpay\",\"amount\":10942,\"payment_dt\":1755345887,\"bank\":\"ANZ Bank\",\"delivery_cost\":2983,\"goods_total\":7959,\"custom_fee\":0},\"items\":[{\"chrt_id\":775141581,\"track_number\":\"WBILMTESTTRACK\",\"price\":964,\"rid\":\"3bfe485e-e5f7-4e14-ba6b-da1ba0591db6\",\"name\":\"Electronic Cotton Towels\",\"sale\":7,\"size\":\"52\",\"total_price\":7959,\"nm_id\":960606410,\"brand\":\"synthesizing\",\"status\":311}],\"locale\":\"fa\",\"internal_signature\":\"\",\"customer_id\":\"486400test\",\"delivery_service\":\"meest\",\"shardkey\":\"9\",\"sm_id\":688,\"date_created\":\"2025-08-16T12:04:47.610Z\",\"oof_shard\":\"10\"}\n) was successfully read by consumer",
+  "time": "16.08.2025 15:04:48"
+}
+{
+  "level": "info",
+  "msg": "no messages received from kafka within the allocated time for partition 0 of demoservice-orders at offset 0: [7] Request Timed Out: the request exceeded the user-specified time limit in the request",
+  "time": "16.08.2025 15:04:52"
+}
+{
+  "level": "info",
+  "msg": "no messages received from kafka within the allocated time for partition 2 of demoservice-orders at offset 0: [7] Request Timed Out: the request exceeded the user-specified time limit in the request",
+  "time": "16.08.2025 15:04:52"
+}
+{
+  "level": "info",
+  "msg": "no messages received from kafka within the allocated time for partition 1 of demoservice-orders at offset 10: [7] Request Timed Out: the request exceeded the user-specified time limit in the request",
+  "time": "16.08.2025 15:04:57"
+}
+{
+  "level": "info",
+  "msg": "no messages received from kafka within the allocated time for partition 0 of demoservice-orders at offset 0: [7] Request Timed Out: the request exceeded the user-specified time limit in the request",
+  "time": "16.08.2025 15:05:01"
+}
+{
+  "level": "info",
+  "msg": "no messages received from kafka within the allocated time for partition 2 of demoservice-orders at offset 0: [7] Request Timed Out: the request exceeded the user-specified time limit in the request",
+  "time": "16.08.2025 15:05:01"
+}
+{
+  "level": "info",
+  "msg": "no messages received from kafka within the allocated time for partition 1 of demoservice-orders at offset 10: [7] Request Timed Out: the request exceeded the user-specified time limit in the request",
+  "time": "16.08.2025 15:05:06"
+}
+{
+  "level": "info",
+  "msg": "no messages received from kafka within the allocated time for partition 0 of demoservice-orders at offset 0: [7] Request Timed Out: the request exceeded the user-specified time limit in the request",
+  "time": "16.08.2025 15:05:10"
+}
+{
+  "level": "info",
+  "msg": "no messages received from kafka within the allocated time for partition 2 of demoservice-orders at offset 0: [7] Request Timed Out: the request exceeded the user-specified time limit in the request",
+  "time": "16.08.2025 15:05:10"
+}
+{
+  "level": "info",
+  "msg": "no messages received from kafka within the allocated time for partition 1 of demoservice-orders at offset 10: [7] Request Timed Out: the request exceeded the user-specified time limit in the request",
+  "time": "16.08.2025 15:05:15"
+}
+{
+  "level": "error",
+  "msg": "The time to read the message exceeded the allowed value",
+  "time": "16.08.2025 15:05:18"
+}
+{
+  "level": "info",
+  "msg": "no messages received from kafka within the allocated time for partition 0 of demoservice-orders at offset 0: [7] Request Timed Out: the request exceeded the user-specified time limit in the request",
+  "time": "16.08.2025 15:05:19"
+}
+{
+  "level": "info",
+  "msg": "no messages received from kafka within the allocated time for partition 2 of demoservice-orders at offset 0: [7] Request Timed Out: the request exceeded the user-specified time limit in the request",
+  "time": "16.08.2025 15:05:19"
+}
+{
+  "level": "info",
+  "msg": "no messages received from kafka within the allocated time for partition 1 of demoservice-orders at offset 10: [7] Request Timed Out: the request exceeded the user-specified time limit in the request",
+  "time": "16.08.2025 15:05:24"
+}
+{
+  "level": "info",
+  "msg": "no messages received from kafka within the allocated time for partition 0 of demoservice-orders at offset 0: [7] Request Timed Out: the request exceeded the user-specified time limit in the request",
+  "time": "16.08.2025 15:05:28"
+}
+{
+  "level": "info",
+  "msg": "no messages received from kafka within the allocated time for partition 2 of demoservice-orders at offset 0: [7] Request Timed Out: the request exceeded the user-specified time limit in the request",
+  "time": "16.08.2025 15:05:28"
+}
+{
+  "level": "info",
+  "msg": "no messages received from kafka within the allocated time for partition 1 of demoservice-orders at offset 10: [7] Request Timed Out: the request exceeded the user-specified time limit in the request",
+  "time": "16.08.2025 15:05:33"
+}
+{
+  "level": "info",
+  "msg": "no messages received from kafka within the allocated time for partition 0 of demoservice-orders at offset 0: [7] Request Timed Out: the request exceeded the user-specified time limit in the request",
+  "time": "16.08.2025 15:05:37"
+}
+{
+  "level": "info",
+  "msg": "no messages received from kafka within the allocated time for partition 2 of demoservice-orders at offset 0: [7] Request Timed Out: the request exceeded the user-specified time limit in the request",
+  "time": "16.08.2025 15:05:37"
+}
+{
+  "level": "info",
+  "msg": "no messages received from kafka within the allocated time for partition 1 of demoservice-orders at offset 10: [7] Request Timed Out: the request exceeded the user-specified time limit in the request",
+  "time": "16.08.2025 15:05:42"
+}
+{
+  "level": "info",
+  "msg": "no messages received from kafka within the allocated time for partition 0 of demoservice-orders at offset 0: [7] Request Timed Out: the request exceeded the user-specified time limit in the request",
+  "time": "16.08.2025 15:05:46"
+}
+{
+  "level": "info",
+  "msg": "no messages received from kafka within the allocated time for partition 2 of demoservice-orders at offset 0: [7] Request Timed Out: the request exceeded the user-specified time limit in the request",
+  "time": "16.08.2025 15:05:46"
+}
+{
+  "level": "error",
+  "msg": "The time to read the message exceeded the allowed value",
+  "time": "16.08.2025 15:05:48"
+}
+{
+  "level": "info",
+  "msg": "no messages received from kafka within the allocated time for partition 1 of demoservice-orders at offset 10: [7] Request Timed Out: the request exceeded the user-specified time limit in the request",
+  "time": "16.08.2025 15:05:51"
+}
+{
+  "level": "info",
+  "msg": "no messages received from kafka within the allocated time for partition 0 of demoservice-orders at offset 0: [7] Request Timed Out: the request exceeded the user-specified time limit in the request",
+  "time": "16.08.2025 15:05:55"
+}
+{
+  "level": "info",
+  "msg": "no messages received from kafka within the allocated time for partition 2 of demoservice-orders at offset 0: [7] Request Timed Out: the request exceeded the user-specified time limit in the request",
+  "time": "16.08.2025 15:05:55"
+}
+{
+  "level": "info",
+  "msg": "no messages received from kafka within the allocated time for partition 1 of demoservice-orders at offset 10: [7] Request Timed Out: the request exceeded the user-specified time limit in the request",
+  "time": "16.08.2025 15:06:00"
+}
+{
+  "level": "info",
+  "msg": "no messages received from kafka within the allocated time for partition 0 of demoservice-orders at offset 0: [7] Request Timed Out: the request exceeded the user-specified time limit in the request",
+  "time": "16.08.2025 15:06:04"
+}
+{
+  "level": "info",
+  "msg": "no messages received from kafka within the allocated time for partition 2 of demoservice-orders at offset 0: [7] Request Timed Out: the request exceeded the user-specified time limit in the request",
+  "time": "16.08.2025 15:06:04"
+}

@@ -26,20 +26,20 @@ func setEnvVars() (map[string]string, error) {
 }
 
 var envMap, _ = setEnvVars()
-var ConnectString = fmt.Sprintf("postgres://%s:%s@%s:%s/%s", envMap["dbUserName"], envMap["dbPassword"], envMap["dbHost"], envMap["dbPort"], envMap["dbName"])
-var topicName = "demoservice-orders"
-var kafkaGroupID = "demoservice-group"
+var ConnectString string = fmt.Sprintf("postgres://%s:%s@%s:%s/%s", envMap["dbUserName"], envMap["dbPassword"], envMap["dbHost"], envMap["dbPort"], envMap["dbName"])
+var TopicName string = "demoservice-orders"
+var kafkaGroupID string = "demoservice-group"
 
 var KafkaWriterConfig = kafka.WriterConfig{
 	Brokers:      []string{"localhost:9092"},
-	Topic:        topicName,
-	Balancer:     &kafka.Hash{}, // Отправка по партициям согласно хэшу указанного ключа
-	RequiredAcks: 1,             // Подтверждение только от leader-partition
+	Balancer:     &kafka.Hash{}, // Отправка по партициям через алгоритм равномерного распределения
+	Topic:        TopicName,
+	RequiredAcks: 1, // Подтверждение только от leader-partition
 	Logger:       KafkaWriteLogger}
 
 var KafkaReaderConfig = kafka.ReaderConfig{
 	Brokers:  []string{"localhost:9092"},
-	Topic:    topicName,
+	Topic:    TopicName,
 	GroupID:  kafkaGroupID,
 	MaxBytes: 10e6,
 	Logger:   KafkaReadLogger}

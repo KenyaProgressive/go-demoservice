@@ -1,8 +1,7 @@
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
 CREATE TABLE IF NOT EXISTS customers (
-  id BIGSERIAL PRIMARY KEY,
-  customer_id TEXT NOT NULL UNIQUE,
+  customer_id TEXT PRIMARY KEY,
   email VARCHAR(100),
   name VARCHAR(50),
   -- максимальная длина номера по Миру в 15 цифр и знак +
@@ -25,7 +24,7 @@ CREATE TABLE IF NOT EXISTS order_info(
 );
 
 CREATE TABLE IF NOT EXISTS payments(
-    id BIGSERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     transaction UUID REFERENCES order_info(order_uid),
     request_id TEXT,
     provider TEXT NOT NULL,
@@ -40,7 +39,7 @@ CREATE TABLE IF NOT EXISTS payments(
 );
 
 CREATE TABLE IF NOT EXISTS deliveries (
-  id BIGSERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   order_uid UUID REFERENCES order_info(order_uid),
   name VARCHAR(50) NOT NULL,
   phone VARCHAR(16) NOT NULL,
@@ -54,15 +53,16 @@ CREATE TABLE IF NOT EXISTS deliveries (
 );
 
 CREATE TABLE IF NOT EXISTS order_items (
-  id BIGSERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   order_uid UUID REFERENCES order_info(order_uid),
-  nm_id BIGINT,
-  chrt_id BIGINT,
-  rid TEXT,
+  track_number TEXT,
+  nm_id BIGINT NOT NULL,
+  chrt_id BIGINT NOT NULL,
+  rid TEXT NOT NULL,
   name TEXT,
   brand TEXT,
   size TEXT,
-  price BIGINT,
+  price BIGINT NOT NULL,
   sale INT,
   total_price INT,
   status INT
