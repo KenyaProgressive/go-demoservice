@@ -14,8 +14,13 @@ PostgresSQL-Kafka-Cache microservice project | Wildberries Tech School
   2. `cd go-demoservice`
 
 # Запуск проекта
-**Перед запуском необходимо переименовать .env.example в .env и установить переменные окружения**
-**DB_PORT ДОЛЖЕН БЫТЬ 5433**
+**Перед запуском необходимо переименовать .env.example в .env и установить переменные окружения (DB_PORT ДОЛЖЕН БЫТЬ 5433)**
+` DB_USERNAME="user"
+  DB_PASSWORD="user"
+  DB_HOST="localhost"
+  DB_PORT=5433
+  DATABASE_NAME="testdb"
+`
 
 Запуск проекта рекомендовано производить с помощью make:
   1. `make run` -- запуск проекта без генератора сообщений
