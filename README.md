@@ -15,6 +15,7 @@ PostgresSQL-Kafka-Cache microservice project | Wildberries Tech School
 
 # Запуск проекта
 **Перед запуском необходимо переименовать .env.example в .env и установить переменные окружения (DB_PORT ДОЛЖЕН БЫТЬ 5433)**
+
 ` DB_USERNAME="user"
   DB_PASSWORD="user"
   DB_HOST="localhost"
