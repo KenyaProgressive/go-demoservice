@@ -23,7 +23,12 @@ func main() {
 		utils.DbLogger.Error(err)
 		panic(err)
 	}
-	defer dbase.Close()
+
+	defer func() {
+		if errDbConnClose := dbase.Close(); errDbConnClose != nil {
+			utils.BaseLogger.Errorf("Error in Db-conn close: %s", errDbConnClose)
+		}
+	}()
 
 	var wg sync.WaitGroup
 
@@ -33,8 +38,15 @@ func main() {
 
 	messageWriter := kafka.NewWriter(utils.KafkaWriterConfig)
 	messageReader := kafka.NewReader(utils.KafkaReaderConfig)
-	defer messageReader.Close()
-	defer messageWriter.Close()
+
+	defer func() {
+		if errMsgReaderClose := messageReader.Close(); errMsgReaderClose != nil {
+			utils.BaseLogger.Errorf("Error in close messaageReader: %s", errMsgReaderClose)
+		}
+		if errMsgWriterClose := messageWriter.Close(); errMsgWriterClose != nil {
+			utils.BaseLogger.Errorf("Error in close messaageWriter: %s", errMsgWriterClose)
+		}
+	}()
 
 	cacheMap := make(map[string]utils.Message)
 

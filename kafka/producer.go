@@ -8,6 +8,7 @@ import (
 	"go-demoservice/utils"
 	"strconv"
 	"sync"
+	"time"
 
 	"github.com/ddosify/go-faker/faker"
 	"github.com/google/uuid"
@@ -18,12 +19,11 @@ func GenerateMessages(encoder *json.Encoder, writer *kafka.Writer, buff *bytes.B
 	utils.BaseLogger.Info("Producer launched sucessfully")
 
 	message := utils.Message{}
-	messageIndices := make([]int, 20)
+	messageIndices := make([]int, 450)
 	maxMessages := len(messageIndices)
 
 	faker := faker.NewFaker()
-
-	for i := range messageIndices {
+	for msgIndex := range messageIndices {
 		select {
 		case <-ctx.Done():
 			wg.Done()
@@ -32,7 +32,7 @@ func GenerateMessages(encoder *json.Encoder, writer *kafka.Writer, buff *bytes.B
 			buff.Reset()
 			makeMessage(&message, &faker)
 			if err := encoder.Encode(message); err != nil {
-				utils.BaseLogger.Errorf("Message %d wasn't encoded to JSON with error: %s", i, err)
+				utils.BaseLogger.Errorf("Message %d wasn't encoded to JSON with error: %s", msgIndex, err)
 				continue
 			}
 			err := writer.WriteMessages(ctx, kafka.Message{
@@ -48,11 +48,12 @@ func GenerateMessages(encoder *json.Encoder, writer *kafka.Writer, buff *bytes.B
 			}
 			utils.KafkaWriteLogger.Infof("Message with uuid %s succesfully pushed in broker", message.OrderUId)
 
-			if i > maxMessages-10 {
-				// last 10 messages will be in cache
+			if msgIndex > maxMessages-100 {
 				cacheMap[message.OrderUId] = message
 			}
 		}
+
+		time.Sleep(time.Second * 2)
 	}
 }
 
