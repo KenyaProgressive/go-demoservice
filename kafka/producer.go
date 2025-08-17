@@ -15,24 +15,25 @@ import (
 	"github.com/segmentio/kafka-go"
 )
 
-func GenerateMessages(encoder *json.Encoder, writer *kafka.Writer, buff *bytes.Buffer, wg *sync.WaitGroup) {
+func GenerateMessages(encoder *json.Encoder, writer *kafka.Writer, buff *bytes.Buffer, wg *sync.WaitGroup, cacheMap map[string]utils.Message) {
 	message := utils.Message{}
-	messageIndices := make([]int, 10)
+	messageIndices := make([]int, 20)
+	maxMessages := len(messageIndices)
 
 	faker := faker.NewFaker()
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
 	defer cancel()
 
 	for i := range messageIndices {
 		buff.Reset()
-		makeMessage(&message, i, &faker)
+		makeMessage(&message, &faker)
 		if err := encoder.Encode(message); err != nil {
 			utils.BaseLogger.Errorf("Message %d wasn't encoded to JSON with error: %s", i, err)
 			continue
 		}
 		err := writer.WriteMessages(ctx, kafka.Message{
 			Value: buff.Bytes(),
-			Key:   []byte("mykey")})
+			Key:   []byte("OrdersKey")})
 		if err != nil {
 			if errors.Is(err, context.DeadlineExceeded) {
 				utils.KafkaWriteLogger.Error("The time to send the message exceeded the allowed value")
@@ -44,11 +45,15 @@ func GenerateMessages(encoder *json.Encoder, writer *kafka.Writer, buff *bytes.B
 		utils.KafkaWriteLogger.Info("Message succesfully pulled in broker")
 		utils.DbLogger.Debugf("PUSHED: %s", buff.String())
 
+		if i > maxMessages-10 {
+			// last 10 messages will be in cache
+			cacheMap[message.OrderUId] = message
+		}
 	}
 	wg.Done()
 }
 
-func makeMessage(message *utils.Message, offset int, randInfoGen *faker.Faker) {
+func makeMessage(message *utils.Message, randInfoGen *faker.Faker) {
 	paymentTimestamp, createdDateUnix := randInfoGen.CurrentTimestamp(), randInfoGen.CurrentISOTimestamp()
 
 	message.OrderUId = uuid.NewString()
@@ -57,7 +62,7 @@ func makeMessage(message *utils.Message, offset int, randInfoGen *faker.Faker) {
 	message.Delivery = utils.Delivery{
 		Name:    randInfoGen.RandomPersonFullName(),
 		Phone:   randInfoGen.RandomPhoneNumber(),
-		ZipCode: utils.TestMessageZipCodes[offset],
+		ZipCode: utils.TestMessageZipCodes[randInfoGen.RandomIntBetween(0, 9)],
 		City:    randInfoGen.RandomAddressCity(),
 		Address: randInfoGen.RandomAddressStreetAddress(),
 		Region:  randInfoGen.RandomAddressCountry(),
@@ -69,7 +74,7 @@ func makeMessage(message *utils.Message, offset int, randInfoGen *faker.Faker) {
 		Provider:     "wbpay",
 		Amount:       0, // Counting will be below this big struct
 		PaymentDt:    uint(paymentTimestamp),
-		Bank:         utils.TestMessageBankNames[offset],
+		Bank:         utils.TestMessageBankNames[randInfoGen.RandomIntBetween(0, 9)],
 		DeliveryCost: uint(randInfoGen.RandomIntBetween(0, 7000)),
 		GoodsTotal:   0, // Counting will be below this big struct
 		CustomFee:    0}

@@ -28,6 +28,7 @@ func main() {
 
 	messageWriter := kafka.NewWriter(utils.KafkaWriterConfig)
 	messageReader := kafka.NewReader(utils.KafkaReaderConfig)
+	cacheMap := make(map[string]utils.Message)
 
 	defer messageReader.Close()
 	defer messageWriter.Close()
@@ -35,10 +36,10 @@ func main() {
 	buff := bytes.NewBuffer(nil)
 	encoder := json.NewEncoder(buff)
 
-	go mykafka.GenerateMessages(encoder, messageWriter, buff, &wg)
+	go mykafka.GenerateMessages(encoder, messageWriter, buff, &wg, cacheMap)
 	go mykafka.ConsumerLoop(messageReader, &wg, dbase)
 
-	backend.App(dbase)
+	backend.App(dbase, cacheMap)
 
 	wg.Wait()
 
