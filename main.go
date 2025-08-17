@@ -2,13 +2,17 @@ package main
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
+	"flag"
 	"fmt"
 	"go-demoservice/db"
 	mykafka "go-demoservice/kafka"
 	"go-demoservice/utils"
 	"go-demoservice/web/backend"
+	"os/signal"
 	"sync"
+	"syscall"
 
 	"github.com/segmentio/kafka-go"
 )
@@ -22,27 +26,52 @@ func main() {
 	defer dbase.Close()
 
 	var wg sync.WaitGroup
-	wg.Add(3)
+
+	genMessageFlag := parseGenMessageFlag()
 
 	utils.BaseLogger.Info("Start working of a service")
 
 	messageWriter := kafka.NewWriter(utils.KafkaWriterConfig)
 	messageReader := kafka.NewReader(utils.KafkaReaderConfig)
-	cacheMap := make(map[string]utils.Message)
-
 	defer messageReader.Close()
 	defer messageWriter.Close()
+
+	cacheMap := make(map[string]utils.Message)
 
 	buff := bytes.NewBuffer(nil)
 	encoder := json.NewEncoder(buff)
 
-	go mykafka.GenerateMessages(encoder, messageWriter, buff, &wg, cacheMap)
-	go mykafka.ConsumerLoop(messageReader, &wg, dbase)
+	globalContext, globContextCancel := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
+	defer globContextCancel()
 
-	backend.App(dbase, cacheMap)
+	if genMessageFlag {
+		wg.Add(1)
+		go func() {
+			mykafka.GenerateMessages(encoder, messageWriter, buff, &wg, cacheMap, globalContext)
+		}()
+	} else {
+		utils.BaseLogger.Info("Producer wasn't launch (-gen=False)")
+	}
+
+	wg.Add(1)
+	go func() {
+		mykafka.ConsumerLoop(messageReader, &wg, dbase, globalContext)
+	}()
+
+	wg.Add(1)
+	go func() {
+		backend.App(dbase, cacheMap, &wg, globalContext)
+	}()
 
 	wg.Wait()
 
 	fmt.Println("Test service successfully completed work")
 	utils.BaseLogger.Info("Service successfully exited without errors")
+}
+
+func parseGenMessageFlag() bool {
+	genMessageFlag := flag.Bool("gen", false, "Generate messages via launching producer-goroutine")
+	flag.Parse()
+
+	return *genMessageFlag
 }

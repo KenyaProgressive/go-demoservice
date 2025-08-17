@@ -8,49 +8,52 @@ import (
 	"go-demoservice/utils"
 	"strconv"
 	"sync"
-	"time"
 
 	"github.com/ddosify/go-faker/faker"
 	"github.com/google/uuid"
 	"github.com/segmentio/kafka-go"
 )
 
-func GenerateMessages(encoder *json.Encoder, writer *kafka.Writer, buff *bytes.Buffer, wg *sync.WaitGroup, cacheMap map[string]utils.Message) {
+func GenerateMessages(encoder *json.Encoder, writer *kafka.Writer, buff *bytes.Buffer, wg *sync.WaitGroup, cacheMap map[string]utils.Message, ctx context.Context) {
+	utils.BaseLogger.Info("Producer launched sucessfully")
+
 	message := utils.Message{}
 	messageIndices := make([]int, 20)
 	maxMessages := len(messageIndices)
 
 	faker := faker.NewFaker()
-	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
-	defer cancel()
 
 	for i := range messageIndices {
-		buff.Reset()
-		makeMessage(&message, &faker)
-		if err := encoder.Encode(message); err != nil {
-			utils.BaseLogger.Errorf("Message %d wasn't encoded to JSON with error: %s", i, err)
-			continue
-		}
-		err := writer.WriteMessages(ctx, kafka.Message{
-			Value: buff.Bytes(),
-			Key:   []byte("OrdersKey")})
-		if err != nil {
-			if errors.Is(err, context.DeadlineExceeded) {
-				utils.KafkaWriteLogger.Error("The time to send the message exceeded the allowed value")
-			} else {
-				utils.KafkaWriteLogger.Error(err)
+		select {
+		case <-ctx.Done():
+			wg.Done()
+			return
+		default:
+			buff.Reset()
+			makeMessage(&message, &faker)
+			if err := encoder.Encode(message); err != nil {
+				utils.BaseLogger.Errorf("Message %d wasn't encoded to JSON with error: %s", i, err)
+				continue
 			}
-			continue
-		}
-		utils.KafkaWriteLogger.Info("Message succesfully pulled in broker")
-		utils.DbLogger.Debugf("PUSHED: %s", buff.String())
+			err := writer.WriteMessages(ctx, kafka.Message{
+				Value: buff.Bytes(),
+				Key:   []byte("OrdersKey")})
+			if err != nil {
+				if errors.Is(err, context.DeadlineExceeded) {
+					utils.KafkaWriteLogger.Error("The time to send the message exceeded the allowed value")
+				} else {
+					utils.KafkaWriteLogger.Error(err)
+				}
+				continue
+			}
+			utils.KafkaWriteLogger.Infof("Message with uuid %s succesfully pushed in broker", message.OrderUId)
 
-		if i > maxMessages-10 {
-			// last 10 messages will be in cache
-			cacheMap[message.OrderUId] = message
+			if i > maxMessages-10 {
+				// last 10 messages will be in cache
+				cacheMap[message.OrderUId] = message
+			}
 		}
 	}
-	wg.Done()
 }
 
 func makeMessage(message *utils.Message, randInfoGen *faker.Faker) {
